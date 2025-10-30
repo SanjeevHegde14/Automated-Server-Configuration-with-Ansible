@@ -1,0 +1,16 @@
+---
+- hosts: servers
+  become: yes
+  
+  roles:
+    - role: base
+      tags: base
+      
+    - role: ssh
+      tags: ssh
+
+    - role: nginx
+      tags: nginx
+
+    - role: app
+      tags: app
