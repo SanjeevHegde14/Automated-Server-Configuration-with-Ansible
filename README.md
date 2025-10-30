@@ -1,6 +1,8 @@
 # Automated Server Configuration with Ansible
+This project automates the complete setup of a new Linux web server using Ansible, following modular and reusable role-based automation practices. It provisions a secure, production-ready environment by configuring user access, security tools, and a web server to host static web applications.
 
-This project automates the configuration of a new Linux web server using Ansible.
+The playbook is designed for quick and repeatable deployment of a web server on Azure (or any cloud platform).
+It ensures system updates, enforces SSH key-based authentication, installs essential packages like fail2ban for security, and deploys a static website automatically using Nginx.
 
 ## What it Does
 
