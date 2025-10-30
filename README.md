@@ -11,6 +11,15 @@ This playbook runs 5 modular roles to:
 * **nginx**: Installs and starts the Nginx web server.
 * **app**: Deploys a static website from a local `site.tar.gz` package.
 
+## Prerequisites
+
+Before running this playbook, you need a target Linux server with:
+1. Passwordless SSH Access: Your local machine's public SSH key must be on the server.
+
+2. Open Firewall Ports: The server's cloud firewall (like Azure or AWS) must allow inbound traffic on:
+- TCP/22 (for SSH / Ansible)
+- TCP/80 (for the Nginx website)
+
 ## How to Run
 
 1.  **Create your `inventory.ini` file:**
