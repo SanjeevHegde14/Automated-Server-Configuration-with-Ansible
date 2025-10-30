@@ -1,34 +1,53 @@
-# Automated-Server-Configuration-with-Ansible
-Status: 🚧 Project in Progress 🚧
+# Automated Server Configuration with Ansible
 
-Project Goal
+This project uses Ansible to fully automate the provisioning and configuration of a new Linux web server. This playbook takes a bare-bones server (like a new VM on Azure, AWS, or DigitalOcean) and, in one command, turns it into a secure, production-ready web host.
 
-To develop a set of modular and reusable Ansible roles for the complete and automated configuration of a secure Linux web server. This project demonstrates Infrastructure as Code (IaC) principles and best practices for configuration management, enabling consistent, repeatable, and secure server provisioning.
+## What This Playbook Does
 
-Planned Tech Stack
+This configuration is broken into modular, reusable roles:
 
-Configuration Management: Ansible
+* ****: Updates all packages (Reading package lists...) and installs  to protect against brute-force attacks.
+* ****: Creates a new admin user named `ansible_admin`, adds them to the `sudo` group, and copies a local public SSH key for access.
+* ****: Hardens the `root` user's account by adding the same public SSH key for secure access.
+* ****: Installs, enables, and starts the Nginx web server.
+* ****: Creates the web directory () and deploys a static web application from a local `site.tar.gz` package.
 
-Target Operating System: Ubuntu 22.04
+## How to Use
 
-Core Services: Nginx, Git, Fail2Ban
+1.  **Prerequisites:**
+    * You need a target Linux server (e.g., Ubuntu 22.04).
+    * You need Ansible installed on your local machine (Defaulting to user installation because normal site-packages is not writeable
+Requirement already satisfied: ansible in /home/anteinfierno/.local/lib/python3.10/site-packages (10.7.0)
+Requirement already satisfied: ansible-core~=2.17.7 in /home/anteinfierno/.local/lib/python3.10/site-packages (from ansible) (2.17.14)
+Requirement already satisfied: PyYAML>=5.1 in /usr/lib/python3/dist-packages (from ansible-core~=2.17.7->ansible) (5.4.1)
+Requirement already satisfied: packaging in /home/anteinfierno/.local/lib/python3.10/site-packages (from ansible-core~=2.17.7->ansible) (25.0)
+Requirement already satisfied: cryptography in /usr/lib/python3/dist-packages (from ansible-core~=2.17.7->ansible) (3.4.8)
+Requirement already satisfied: resolvelib<1.1.0,>=0.5.3 in /home/anteinfierno/.local/lib/python3.10/site-packages (from ansible-core~=2.17.7->ansible) (1.0.1)
+Requirement already satisfied: jinja2>=3.0.0 in /usr/lib/python3/dist-packages (from ansible-core~=2.17.7->ansible) (3.0.3)).
+    * You must have passwordless SSH access to your server (e.g., by using `ssh-copy-id user@server_ip`).
 
-Planned Architecture & Roles
+2.  **Clone this repository:**
+    ```bash
+    git clone https://github.com/your-username/your-repo-name.git
+    cd your-repo-name
+    ```
 
-This repository will contain a collection of independent Ansible roles, each responsible for a specific component of the server configuration:
+3.  **Create your Inventory:**
+    This repository's `.gitignore` file correctly ignores the inventory file for security. You must create your own `inventory.ini`:
 
-common Role: Handles baseline server setup, including updating packages, setting the timezone, and hardening user access.
+    ```ini
+    [servers]
+    my_server ansible_host=YOUR_SERVER_IP ansible_user=YOUR_SSH_USER
+    ```
 
-security Role: Implements essential security measures by installing and configuring fail2ban to prevent brute-force attacks and setting up basic firewall rules.
+4.  **Run the Playbook:**
 
-nginx Role: Installs, configures, and manages the Nginx web server.
+    * **To run the entire setup:**
+        ```bash
+        ansible-playbook -i inventory.ini setup.yml
+        ```
 
-webapp-deploy Role: A powerful role designed to automatically deploy a web application by:
-
-Cloning a specified Git repository.
-
-Installing any necessary dependencies.
-
-Configuring Nginx to serve the application.
-
-A master playbook.yml file will be used to orchestrate these roles, allowing for a one-command, idempotent provisioning of a complete web server from a bare OS.
+    * **To run only a specific role (e.g., to re-deploy the app):**
+        ```bash
+        ansible-playbook -i inventory.ini setup.yml --tags "app"
+        ```
