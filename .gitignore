@@ -1,0 +1,5 @@
+# Ignore the inventory file
+inventory.ini
+
+# Ignore local system files
+.DS_Store
