@@ -3,3 +3,4 @@ inventory.ini
 
 # Ignore local system files
 .DS_Store
+dummy_site/
