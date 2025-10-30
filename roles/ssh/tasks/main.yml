@@ -1,0 +1,5 @@
+- name: Add your local public SSH key to the server's root user
+  ansible.posix.authorized_key:
+    user: root
+    state: present
+    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
