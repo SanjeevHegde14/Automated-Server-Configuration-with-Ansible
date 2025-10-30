@@ -1,0 +1,15 @@
+---
+# tasks file for app
+- name: Copy the website tarball to the server
+  ansible.builtin.copy:
+    src: site.tar.gz  # The file in your local project folder
+    dest: /tmp/site.tar.gz
+
+- name: Unarchive the website to the Nginx web root
+  ansible.builtin.unarchive:
+    src: /tmp/site.tar.gz
+    dest: /var/www/html/
+    remote_src: yes
+    owner: www-data
+    group: www-data
+    extra_opts: [--strip-components=1]
