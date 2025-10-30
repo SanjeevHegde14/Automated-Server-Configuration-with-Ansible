@@ -1,8 +1,17 @@
 ---
 # tasks file for app
+
+- name: Create web root directory if it doesn't exist
+  ansible.builtin.file:
+    path: /var/www/html
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'
+
 - name: Copy the website tarball to the server
   ansible.builtin.copy:
-    src: site.tar.gz  # The file in your local project folder
+    src: site.tar.gz  # The file in our local project folder
     dest: /tmp/site.tar.gz
 
 - name: Unarchive the website to the Nginx web root
