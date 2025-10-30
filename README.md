@@ -1,4 +1,4 @@
-Automated Server Configuration with Ansible
+**Automated Server Configuration with Ansible**
 
 This project automates the configuration of a new Linux web server using Ansible.
 
@@ -16,7 +16,7 @@ nginx: Installs and starts the Nginx web server.
 
 app: Deploys a static website from a local site.tar.gz package.
 
-How to Run
+**How to Run**
 
 Create your inventory.ini file:
 (This file is in .gitignore for security, so you must create it locally).
