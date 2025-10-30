@@ -1,4 +1,4 @@
-**Automated Server Configuration with Ansible**
+#**Automated Server Configuration with Ansible**
 
 This project automates the configuration of a new Linux web server using Ansible.
 
