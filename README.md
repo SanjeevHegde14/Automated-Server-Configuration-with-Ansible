@@ -41,5 +41,4 @@ Before running this playbook, you need a target Linux server with:
     ansible-playbook -i inventory.ini setup.yml --tags "app"
     ```
 
-    <img width="952" height="703" alt="Screenshot 2025-10-30 190939" src="https://github.com/user-attachments/assets/76307d66-031e-441d-950d-17cc463a4034" />
 
