@@ -21,6 +21,7 @@ Before running this playbook, you need a target Linux server with:
 2. Open Firewall Ports: The server's cloud firewall (like Azure or AWS) must allow inbound traffic on:
 - TCP/22 (for SSH / Ansible)
 - TCP/80 (for the Nginx website)
+<img width="587" height="358" alt="Screenshot 2025-10-30 190939" src="https://github.com/user-attachments/assets/e8c07b6b-2131-409a-9b27-bc047c164e2c" />
 
 ## How to Run
 
@@ -35,6 +36,7 @@ Before running this playbook, you need a target Linux server with:
     ```bash
     ansible-playbook -i inventory.ini setup.yml
     ```
+    
 
 3.  **Run only a specific part (e.g., to re-deploy the app):**
     ```bash
